@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>স্বপ্নময় মানব কল্যান সংগঠন</title>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Tiro+Bangla:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #1a6b3c;
+    --green-light: #22883f;
+    --green-pale: #e8f5ee;
+    --gold: #c8860a;
+    --gold-light: #f0a500;
+    --cream: #fdfaf4;
+    --dark: #1a1a1a;
+    --gray: #6b7280;
+    --gray-light: #f3f4f6;
+    --white: #ffffff;
+    --shadow: 0 4px 24px rgba(26,107,60,0.10);
+    --radius: 16px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Hind Siliguri', sans-serif;
+    background: var(--cream);
+    color: var(--dark);
+    min-height: 100vh;
+  }
+
+  /* ===== TOP BAR ===== */
+  .topbar {
+    background: linear-gradient(135deg, var(--green) 0%, #0f4a29 100%);
+    padding: 0 16px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+  }
+  .topbar-inner {
+    max-width: 480px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+  }
+  .logo-area { display: flex; align-items: center; gap: 10px; }
+  .logo-icon {
+    width: 36px; height: 36px;
+    background: var(--gold-light);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+  }
+  .logo-text { color: white; }
+  .logo-text .org-name { font-size: 13px; font-weight: 600; line-height: 1.2; }
+  .logo-text .org-sub { font-size: 10px; opacity: 0.75; }
+  .notif-btn {
+    background: rgba(255,255,255,0.15);
+    border: none; cursor: pointer;
+    width: 36px; height: 36px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; position: relative;
+  }
+  .notif-dot {
+    position: absolute; top: 6px; right: 6px;
+    width: 8px; height: 8px;
+    background: var(--gold-light);
+    border-radius: 50%;
+    border: 2px solid var(--green);
+  }
+
+  /* ===== NAV TABS ===== */
+  .nav-tabs {
+    background: white;
+    border-bottom: 2px solid var(--green-pale);
+    position: sticky;
+    top: 60px;
+    z-index: 99;
+  }
+  .nav-tabs-inner {
+    max-width: 480px;
+    margin: 0 auto;
+    display: flex;
+  }
+  .nav-tab {
+    flex: 1;
+    padding: 12px 4px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--gray);
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s;
+    border: none;
+    background: none;
+    font-family: 'Hind Siliguri', sans-serif;
+  }
+  .nav-tab.active {
+    color: var(--green);
+    border-bottom-color: var(--green);
+    font-weight: 700;
+  }
+  .nav-tab-icon { font-size: 18px; display: block; margin-bottom: 2px; }
+
+  /* ===== MAIN CONTENT ===== */
+  .main {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 16px;
+  }
+
+  /* ===== PAGE ===== */
+  .page { display: none; }
+  .page.active { display: block; }
+
+  /* ===== CARDS ===== */
+  .card {
+    background: white;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 20px;
+    margin-bottom: 16px;
+  }
+  .card-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--gray);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* ===== DASHBOARD STATS ===== */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .stat-card {
+    border-radius: 14px;
+    padding: 16px;
+    position: relative;
+    overflow: hidden;
+  }
+  .stat-card.green {
+    background: linear-gradient(135deg, var(--green) 0%, var(--green-light) 100%);
+    color: white;
+  }
+  .stat-card.gold {
+    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+    color: white;
+  }
+  .stat-card.blue {
+    background: linear-gradient(135deg, #1d4ed8 0%, #3b82f6 100%);
+    color: white;
+  }
+  .stat-card.purple {
+    background: linear-gradient(135deg, #7c3aed 0%, #a855f7 100%);
+    color: white;
+  }
+  .stat-card::after {
+    content: '';
+    position: absolute;
+    top: -20px; right: -20px;
+    width: 80px; height: 80px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 50%;
+  }
+  .stat-label { font-size: 11px; opacity: 0.85; margin-bottom: 6px; }
+  .stat-value { font-size: 22px; font-weight: 700; }
+  .stat-sub { font-size: 10px; opacity: 0.75; margin-top: 2px; }
+  .stat-icon { font-size: 22px; margin-bottom: 6px; }
+
+  /* ===== MONTH SUMMARY ===== */
+  .month-bar {
+    background: linear-gradient(135deg, var(--green) 0%, #0f4a29 100%);
+    border-radius: var(--radius);
+    padding: 20px;
+    color: white;
+    margin-bottom: 16px;
+    position: relative;
+    overflow: hidden;
+  }
+  .month-bar::before {
+    content: '🌙';
+    position: absolute;
+    right: 20px; top: 50%;
+    transform: translateY(-50%);
+    font-size: 48px;
+    opacity: 0.15;
+  }
+  .month-title { font-size: 13px; opacity: 0.8; margin-bottom: 4px; }
+  .month-amount { font-size: 28px; font-weight: 700; }
+  .month-detail { font-size: 12px; opacity: 0.75; margin-top: 6px; }
+  .progress-bar-wrap {
+    background: rgba(255,255,255,0.2);
+    border-radius: 100px;
+    height: 8px;
+    margin-top: 12px;
+    overflow: hidden;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: var(--gold-light);
+    border-radius: 100px;
+    width: 68%;
+    transition: width 1s ease;
+  }
+  .progress-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    opacity: 0.75;
+    margin-top: 4px;
+  }
+
+  /* ===== RECENT TRANSACTIONS ===== */
+  .txn-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--green-pale);
+  }
+  .txn-item:last-child { border-bottom: none; }
+  .txn-avatar {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .txn-avatar.income { background: #dcfce7; color: var(--green); }
+  .txn-avatar.expense { background: #fee2e2; color: #dc2626; }
+  .txn-info { flex: 1 }
+  .txn-name { font-size: 14px; font-weight: 600; }
+  .txn-date { font-size: 11px; color: var(--gray); margin-top: 1px; }
+  .txn-amount { font-size: 15px; font-weight: 700; }
+  .txn-amount.income { color: var(--green); }
+  .txn-amount.expense { color: #dc2626; }
+
+  /* ===== MEMBER LIST ===== */
+  .member-search {
+    display: flex;
+    align-items: center;
+    background: white;
+    border-radius: 12px;
+    padding: 10px 14px;
+    gap: 8px;
+    margin-bottom: 16px;
+    box-shadow: var(--shadow);
+  }
+  .member-search input {
+    border: none; outline: none;
+    font-family: 'Hind Siliguri', sans-serif;
+    font-size: 14px;
+    flex: 1;
+    background: transparent;
+  }
+  .member-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: white;
+    border-radius: 14px;
+    padding: 14px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .member-item:active { transform: scale(0.98); }
+  .member-avatar {
+    width: 46px; height: 46px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--green), var(--green-light));
+    color: white;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; font-weight: 700;
+    flex-shrink: 0;
+  }
+  .member-info { flex: 1; }
+  .member-name { font-size: 14px; font-weight: 600; }
+  .member-phone { font-size: 12px; color: var(--gray); }
+  .member-badge {
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 100px;
+    font-weight: 600;
+  }
+  .badge-active { background: #dcfce7; color: var(--green); }
+  .badge-due { background: #fef9c3; color: #854d0e; }
+  .member-amount {
+    text-align: right;
+  }
+  .member-total { font-size: 14px; font-weight: 700; color: var(--green); }
+  .member-month { font-size: 10px; color: var(--gray); }
+
+  /* ===== YATIM SECTION ===== */
+  .yatim-card {
+    background: white;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    margin-bottom: 16px;
+  }
+  .yatim-header {
+    background: linear-gradient(135deg, #7c3aed, #a855f7);
+    padding: 16px;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .yatim-avatar {
+    width: 48px; height: 48px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+  }
+  .yatim-name { font-size: 15px; font-weight: 700; }
+  .yatim-school { font-size: 12px; opacity: 0.8; }
+  .yatim-body { padding: 14px; }
+  .yatim-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--green-pale);
+    font-size: 13px;
+  }
+  .yatim-row:last-child { border-bottom: none; }
+  .yatim-row span:first-child { color: var(--gray); }
+  .yatim-row span:last-child { font-weight: 600; }
+
+  /* ===== ADD PAYMENT FORM ===== */
+  .form-group { margin-bottom: 16px; }
+  .form-label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--gray);
+    margin-bottom: 6px;
+  }
+  .form-control {
+    width: 100%;
+    padding: 12px 14px;
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
+    font-family: 'Hind Siliguri', sans-serif;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+    background: white;
+  }
+  .form-control:focus { border-color: var(--green); }
+  select.form-control { cursor: pointer; }
+
+  .amount-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  .amount-chip {
+    padding: 10px 4px;
+    border: 2px solid #e5e7eb;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+    background: white;
+    font-family: 'Hind Siliguri', sans-serif;
+  }
+  .amount-chip:hover, .amount-chip.selected {
+    border-color: var(--green);
+    background: var(--green-pale);
+    color: var(--green);
+  }
+
+  .sms-preview {
+    background: #f0fdf4;
+    border: 1px dashed var(--green);
+    border-radius: 12px;
+    padding: 14px;
+    margin-bottom: 16px;
+  }
+  .sms-preview-title {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--green);
+    margin-bottom: 6px;
+    display: flex; align-items: center; gap: 4px;
+  }
+  .sms-preview-text {
+    font-size: 13px;
+    color: #374151;
+    line-height: 1.6;
+  }
+
+  .btn {
+    width: 100%;
+    padding: 14px;
+    border-radius: 14px;
+    font-family: 'Hind Siliguri', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--green), var(--green-light));
+    color: white;
+    box-shadow: 0 4px 14px rgba(26,107,60,0.35);
+  }
+  .btn-primary:active { transform: scale(0.98); }
+
+  /* ===== REPORT ===== */
+  .report-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--green-pale);
+    font-size: 13px;
+  }
+  .report-row:last-child { border-bottom: none; }
+  .report-label { color: var(--gray); display: flex; align-items: center; gap: 6px; }
+  .report-value { font-weight: 700; }
+  .report-value.income { color: var(--green); }
+  .report-value.expense { color: #dc2626; }
+  .report-value.balance { color: var(--gold); font-size: 16px; }
+
+  .month-selector {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    margin-bottom: 16px;
+    scrollbar-width: none;
+  }
+  .month-chip {
+    flex-shrink: 0;
+    padding: 6px 14px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 600;
+    border: 2px solid #e5e7eb;
+    background: white;
+    cursor: pointer;
+    font-family: 'Hind Siliguri', sans-serif;
+    transition: all 0.15s;
+  }
+  .month-chip.active {
+    background: var(--green);
+    color: white;
+    border-color: var(--green);
+  }
+
+  /* ===== TOAST ===== */
+  .toast {
+    position: fixed;
+    bottom: 90px;
+    left: 50%; transform: translateX(-50%);
+    background: var(--dark);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 500;
+    z-index: 999;
+    opacity: 0;
+    transition: opacity 0.3s;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    pointer-events: none;
+  }
+  .toast.show { opacity: 1; }
+
+  /* ===== BOTTOM NAV ===== */
+  .bottom-nav {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    background: white;
+    border-top: 1px solid #e5e7eb;
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
+    z-index: 100;
+  }
+  .bottom-nav-inner {
+    max-width: 480px;
+    margin: 0 auto;
+    display: flex;
+  }
+  .bottom-btn {
+    flex: 1;
+    padding: 10px 4px 14px;
+    text-align: center;
+    font-size: 10px;
+    color: var(--gray);
+    cursor: pointer;
+    border: none;
+    background: none;
+    font-family: 'Hind Siliguri', sans-serif;
+    transition: color 0.2s;
+    font-weight: 500;
+  }
+  .bottom-btn.active { color: var(--green); }
+  .bottom-btn-icon { font-size: 22px; display: block; margin-bottom: 2px; }
+  .bottom-btn.add-btn {
+    position: relative;
+    top: -16px;
+  }
+  .add-circle {
+    width: 52px; height: 52px;
+    background: linear-gradient(135deg, var(--green), var(--green-light));
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 2px;
+    box-shadow: 0 4px 14px rgba(26,107,60,0.4);
+    font-size: 26px;
+    color: white;
+  }
+
+  .spacer { height: 90px; }
+
+  /* ===== SECTION HEADER ===== */
+  .section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+  }
+  .section-title {
+    font-size: 16px;
+    font-weight: 700;
+  }
+  .see-all {
+    font-size: 12px;
+    color: var(--green);
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  /* ===== EMPTY STATE ===== */
+  .empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--gray);
+  }
+  .empty-icon { font-size: 48px; margin-bottom: 12px; }
+  .empty-text { font-size: 14px; }
+
+  /* Fade-in animation */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .page.active > * {
+    animation: fadeInUp 0.3s ease forwards;
+  }
+
+  /* Scrollable content */
+  .scroll-content {
+    overflow-y: auto;
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="logo-area">
+      <div class="logo-icon">🌙</div>
+      <div class="logo-text">
+        <div class="org-name">স্বপ্নময় মানব কল্যান</div>
+        <div class="org-sub">সংগঠন ২০২২ • ২৫৫ সদস্য</div>
+      </div>
+    </div>
+    <button class="notif-btn" onclick="showToast('📬 ৩টি নতুন বার্তা')">
+      🔔
+      <div class="notif-dot"></div>
+    </button>
+  </div>
+</div>
+
+<!-- NAV TABS (hidden on mobile, using bottom nav) -->
+
+<!-- MAIN CONTENT -->
+<div class="main">
+
+  <!-- ===== DASHBOARD ===== -->
+  <div class="page active" id="page-home">
+
+    <!-- Month Summary -->
+    <div class="month-bar">
+      <div class="month-title">এপ্রিল ২০২৬ — মোট সংগ্রহ</div>
+      <div class="month-amount">৳ ১২,৮৫০</div>
+      <div class="month-detail">লক্ষ্যমাত্রা ৳১৮,৮৫০ এর মধ্যে ৬৮% সম্পন্ন</div>
+      <div class="progress-bar-wrap">
+        <div class="progress-bar-fill"></div>
+      </div>
+      <div class="progress-labels">
+        <span>সংগ্রহ: ৳১২,৮৫০</span>
+        <span>বাকি: ৳৬,০০০</span>
+      </div>
+    </div>
+
+    <!-- Stats Grid -->
+    <div class="stats-grid">
+      <div class="stat-card green">
+        <div class="stat-icon">👥</div>
+        <div class="stat-label">মোট সদস্য</div>
+        <div class="stat-value">২৫৫</div>
+        <div class="stat-sub">+৮ এই মাসে</div>
+      </div>
+      <div class="stat-card gold">
+        <div class="stat-icon">🕌</div>
+        <div class="stat-label">এতিম ছাত্র</div>
+        <div class="stat-value">১৩</div>
+        <div class="stat-sub">সক্রিয় সহযোগিতা</div>
+      </div>
+      <div class="stat-card blue">
+        <div class="stat-icon">💰</div>
+        <div class="stat-label">এই মাসে ব্যয়</div>
+        <div class="stat-value">৳৯,৭৫০</div>
+        <div class="stat-sub">১৩ জন ছাত্র</div>
+      </div>
+      <div class="stat-card purple">
+        <div class="stat-icon">📦</div>
+        <div class="stat-label">তহবিল ব্যালান্স</div>
+        <div class="stat-value">৳৩,১০০</div>
+        <div class="stat-sub">সংরক্ষিত</div>
+      </div>
+    </div>
+
+    <!-- Recent Transactions -->
+    <div class="card">
+      <div class="section-header">
+        <div class="card-title" style="margin:0">📋 সাম্প্রতিক লেনদেন</div>
+        <span class="see-all" onclick="switchPage('page-report')">সব দেখুন</span>
+      </div>
+
+      <div class="txn-item">
+        <div class="txn-avatar income">ম</div>
+        <div class="txn-info">
+          <div class="txn-name">মোহাম্মদ রাকিব</div>
+          <div class="txn-date">আজ ১০:৩০ AM • SMS পাঠানো হয়েছে ✓</div>
+        </div>
+        <div class="txn-amount income">+৳৫০০</div>
+      </div>
+
+      <div class="txn-item">
+        <div class="txn-avatar income">স</div>
+        <div class="txn-info">
+          <div class="txn-name">সাইফুল ইসলাম</div>
+          <div class="txn-date">আজ ৯:১৫ AM • SMS পাঠানো হয়েছে ✓</div>
+        </div>
+        <div class="txn-amount income">+৳২০০</div>
+      </div>
+
+      <div class="txn-item">
+        <div class="txn-avatar expense">🕌</div>
+        <div class="txn-info">
+          <div class="txn-name">এতিম ছাত্র সহযোগিতা</div>
+          <div class="txn-date">গতকাল • ১৩ জন ছাত্র</div>
+        </div>
+        <div class="txn-amount expense">-৳৯,৭৫০</div>
+      </div>
+
+      <div class="txn-item">
+        <div class="txn-avatar income">ফ</div>
+        <div class="txn-info">
+          <div class="txn-name">ফাতেমা বেগম</div>
+          <div class="txn-date">১৫ এপ্রিল • SMS পাঠানো হয়েছে ✓</div>
+        </div>
+        <div class="txn-amount income">+৳১০০</div>
+      </div>
+
+      <div class="txn-item">
+        <div class="txn-avatar income">আ</div>
+        <div class="txn-info">
+          <div class="txn-name">আব্দুল করিম</div>
+          <div class="txn-date">১৪ এপ্রিল • SMS পাঠানো হয়েছে ✓</div>
+        </div>
+        <div class="txn-amount income">+৳৩০০</div>
+      </div>
+    </div>
+
+    <div class="spacer"></div>
+  </div>
+
+  <!-- ===== MEMBER PAGE ===== -->
+  <div class="page" id="page-members">
+
+    <div class="member-search">
+      <span>🔍</span>
+      <input type="text" placeholder="সদস্য খুঁজুন..." id="member-search-input" oninput="filterMembers(this.value)">
+    </div>
+
+    <div style="display:flex; gap:8px; margin-bottom:14px;">
+      <div style="background:var(--green-pale); color:var(--green); padding:8px 14px; border-radius:100px; font-size:12px; font-weight:700;">সব (২৫৫)</div>
+      <div style="background:white; padding:8px 14px; border-radius:100px; font-size:12px; font-weight:600; box-shadow:var(--shadow);">সক্রিয় (২৪১)</div>
+      <div style="background:white; padding:8px 14px; border-radius:100px; font-size:12px; font-weight:600; box-shadow:var(--shadow);">বকেয়া (১৪)</div>
+    </div>
+
+    <div id="member-list">
+
+      <div class="member-item" onclick="showToast('📱 রাকিব ভাইয়ের প্রোফাইল লোড হচ্ছে...')">
+        <div class="member-avatar">র</div>
+        <div class="member-info">
+          <div class="member-name">মোহাম্মদ রাকিব</div>
+          <div class="member-phone">📞 ০১৭১২-৩৪৫৬৭৮</div>
+        </div>
+        <div class="member-amount">
+          <div class="member-total">৳৫,৫০০</div>
+          <div class="member-month">মোট দেওয়া</div>
+        </div>
+        <span class="member-badge badge-active">সক্রিয়</span>
+      </div>
+
+      <div class="member-item" onclick="showToast('📱 সাইফুল ভাইয়ের প্রোফাইল লোড হচ্ছে...')">
+        <div class="member-avatar">সা</div>
+        <div class="member-info">
+          <div class="member-name">সাইফুল ইসলাম</div>
+          <div class="member-phone">📞 ০১৮২৩-৪৫৬৭৮৯</div>
+        </div>
+        <div class="member-amount">
+          <div class="member-total">৳৩,২০০</div>
+          <div class="member-month">মোট দেওয়া</div>
+        </div>
+        <span class="member-badge badge-active">সক্রিয়</span>
+      </div>
+
+      <div class="member-item" onclick="showToast('📱 ফাতেমা আপুর প্রোফাইল লোড হচ্ছে...')">
+        <div class="member-avatar">ফা</div>
+        <div class="member-info">
+          <div class="member-name">ফাতেমা বেগম</div>
+          <div class="member-phone">📞 ০১৯১১-৫৬৭৮৯০</div>
+        </div>
+        <div class="member-amount">
+          <div class="member-total">৳১,৮০০</div>
+          <div class="member-month">মোট দেওয়া</div>
+        </div>
+        <span class="member-badge badge-active">সক্রিয়</span>
+      </div>
+
+      <div class="member-item" onclick="showToast('📱 করিম ভাইয়ের প্রোফাইল লোড হচ্ছে...')">
+        <div class="member-avatar" style="background: linear-gradient(135deg,#854d0e,#ca8a04);">আ</div>
+        <div class="member-info">
+          <div class="member-name">আব্দুল করিম</div>
+          <div class="member-phone">📞 ০১৬৭৮-৯০১২৩৪</div>
+        </div>
+        <div class="member-amount">
+          <div class="member-total">৳২,৪০০</div>
+          <div class="member-month">মোট দেওয়া</div>
+        </div>
+        <span class="member-badge badge-due">বকেয়া</span>
+      </div>
+
+      <div class="member-item" onclick="showToast('📱 নাসরিন আপুর প্রোফাইল লোড হচ্ছে...')">
+        <div class="member-avatar" style="background: linear-gradient(135deg,#1d4ed8,#3b82f6);">না</div>
+        <div class="member-info">
+          <div class="member-name">নাসরিন আক্তার</div>
+          <div class="member-phone">📞 ০১৫৫৫-৬৭৮৯০১</div>
+        </div>
+        <div class="member-amount">
+          <div class="member-total">৳৯০০</div>
+          <div class="member-month">মোট দেওয়া</div>
+        </div>
+        <span class="member-badge badge-active">সক্রিয়</span>
+      </div>
+
+      <div style="text-align:center; padding: 16px; color:var(--gray); font-size:13px;">
+        ...আরও ২৫০ জন সদস্য
+      </div>
+    </div>
+
+    <div class="spacer"></div>
+  </div>
+
+  <!-- ===== ADD PAYMENT PAGE ===== -->
+  <div class="page" id="page-add">
+
+    <div class="card">
+      <div class="card-title">💳 নতুন চাঁদা জমা করুন</div>
+
+      <div class="form-group">
+        <label class="form-label">সদস্য নির্বাচন করুন</label>
+        <select class="form-control" id="select-member" onchange="updateSMSPreview()">
+          <option value="">-- সদস্য বেছে নিন --</option>
+          <option value="রাকিব ভাই">মোহাম্মদ রাকিব (০১৭১২-৩৪৫৬৭৮)</option>
+          <option value="সাইফুল ভাই">সাইফুল ইসলাম (০১৮২৩-৪৫৬৭৮৯)</option>
+          <option value="ফাতেমা আপু">ফাতেমা বেগম (০১৯১১-৫৬৭৮৯০)</option>
+          <option value="করিম ভাই">আব্দুল করিম (০১৬৭৮-৯০১২৩৪)</option>
+          <option value="নাসরিন আপু">নাসরিন আক্তার (০১৫৫৫-৬৭৮৯০১)</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">পরিমাণ (টাকা)</label>
+        <div class="amount-grid">
+          <button class="amount-chip" onclick="selectAmount(20, this)">৳২০</button>
+          <button class="amount-chip" onclick="selectAmount(50, this)">৳৫০</button>
+          <button class="amount-chip" onclick="selectAmount(100, this)">৳১০০</button>
+          <button class="amount-chip" onclick="selectAmount(200, this)">৳২০০</button>
+          <button class="amount-chip" onclick="selectAmount(300, this)">৳৩০০</button>
+          <button class="amount-chip" onclick="selectAmount(500, this)">৳৫০০</button>
+          <button class="amount-chip" onclick="selectAmount(1000, this)">৳১০০০</button>
+          <button class="amount-chip" id="custom-chip" onclick="selectCustom()">অন্য</button>
+        </div>
+        <input type="number" class="form-control" id="amount-input" placeholder="টাকার পরিমাণ লিখুন" oninput="updateSMSPreview()">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">মাস</label>
+        <select class="form-control" id="select-month" onchange="updateSMSPreview()">
+          <option>এপ্রিল ২০২৬</option>
+          <option>মার্চ ২০২৬</option>
+          <option>ফেব্রুয়ারি ২০২৬</option>
+          <option>জানুয়ারি ২০২৬</option>
+        </select>
+      </div>
+
+      <!-- SMS Preview -->
+      <div class="sms-preview" id="sms-preview" style="display:none">
+        <div class="sms-preview-title">📱 অটো SMS প্রিভিউ</div>
+        <div class="sms-preview-text" id="sms-text">—</div>
+      </div>
+
+      <button class="btn btn-primary" onclick="submitPayment()">
+        💾 জমা করুন ও SMS পাঠান
+      </button>
+    </div>
+
+    <div class="card">
+      <div class="card-title">💸 ব্যয় রেকর্ড করুন</div>
+
+      <div class="form-group">
+        <label class="form-label">ব্যয়ের বিবরণ</label>
+        <input type="text" class="form-control" placeholder="যেমন: ১৩ জন ছাত্রের মাসিক সহযোগিতা">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">পরিমাণ</label>
+        <input type="number" class="form-control" placeholder="টাকার পরিমাণ">
+      </div>
+
+      <button class="btn" style="background:#fee2e2; color:#dc2626; font-weight:700;" onclick="showToast('✅ ব্যয় রেকর্ড হয়েছে!')">
+        📝 ব্যয় রেকর্ড করুন
+      </button>
+    </div>
+
+    <div class="spacer"></div>
+  </div>
+
+  <!-- ===== YATIM PAGE ===== -->
+  <div class="page" id="page-yatim">
+
+    <div class="card" style="background: linear-gradient(135deg,#7c3aed,#a855f7); color:white; margin-bottom:16px;">
+      <div style="font-size:12px; opacity:0.85; margin-bottom:4px;">মোট এতিম ছাত্র</div>
+      <div style="font-size:28px; font-weight:700;">১৩ জন</div>
+      <div style="font-size:12px; opacity:0.75; margin-top:4px;">মাসিক সহযোগিতা: ৳৯,৭৫০</div>
+    </div>
+
+    <div class="yatim-card">
+      <div class="yatim-header">
+        <div class="yatim-avatar">👦</div>
+        <div>
+          <div class="yatim-name">মোহাম্মদ রাফি</div>
+          <div class="yatim-school">জামিয়া ইসলামিয়া, ঢাকা • ক্লাস ৬</div>
+        </div>
+      </div>
+      <div class="yatim-body">
+        <div class="yatim-row">
+          <span>মাসিক সহযোগিতা</span>
+          <span>৳৭৫০</span>
+        </div>
+        <div class="yatim-row">
+          <span>শুরু থেকে মোট পেয়েছে</span>
+          <span style="color:var(--green)">৳২৭,০০০</span>
+        </div>
+        <div class="yatim-row">
+          <span>অভিভাবক</span>
+          <span>মা: হালিমা বেগম</span>
+        </div>
+        <div class="yatim-row">
+          <span>যোগাযোগ</span>
+          <span>০১৭৮৮-১২৩৪৫৬</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="yatim-card">
+      <div class="yatim-header" style="background: linear-gradient(135deg,#0f766e,#14b8a6);">
+        <div class="yatim-avatar">👦</div>
+        <div>
+          <div class="yatim-name">আব্দুল্লাহ সাফি</div>
+          <div class="yatim-school">দারুল উলুম মাদ্রাসা • ক্লাস ৪</div>
+        </div>
+      </div>
+      <div class="yatim-body">
+        <div class="yatim-row">
+          <span>মাসিক সহযোগিতা</span>
+          <span>৳৭৫০</span>
+        </div>
+        <div class="yatim-row">
+          <span>শুরু থেকে মোট পেয়েছে</span>
+          <span style="color:var(--green)">৳১৮,০০০</span>
+        </div>
+        <div class="yatim-row">
+          <span>অভিভাবক</span>
+          <span>চাচা: আলাউদ্দিন</span>
+        </div>
+        <div class="yatim-row">
+          <span>যোগাযোগ</span>
+          <span>০১৮১১-৯৮৭৬৫৪</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align:center; padding: 16px; color:var(--gray); font-size:13px; background:white; border-radius:var(--radius); box-shadow:var(--shadow);">
+      ...আরও ১১ জন এতিম ছাত্র
+    </div>
+
+    <div class="spacer"></div>
+  </div>
+
+  <!-- ===== REPORT PAGE ===== -->
+  <div class="page" id="page-report">
+
+    <div class="month-selector">
+      <button class="month-chip active">এপ্রিল ২০২৬</button>
+      <button class="month-chip" onclick="switchMonthChip(this)">মার্চ ২০২৬</button>
+      <button class="month-chip" onclick="switchMonthChip(this)">ফেব্রু ২০২৬</button>
+      <button class="month-chip" onclick="switchMonthChip(this)">জানু ২০২৬</button>
+      <button class="month-chip" onclick="switchMonthChip(this)">ডিসে ২০২৫</button>
+    </div>
+
+    <div class="card">
+      <div class="card-title">📊 এপ্রিল ২০২৬ সারসংক্ষেপ</div>
+
+      <div class="report-row">
+        <span class="report-label">💚 মোট সংগ্রহ</span>
+        <span class="report-value income">৳১২,৮৫০</span>
+      </div>
+      <div class="report-row">
+        <span class="report-label">❤️ মোট ব্যয়</span>
+        <span class="report-value expense">৳৯,৭৫০</span>
+      </div>
+      <div class="report-row" style="border-top: 2px dashed var(--green-pale); margin-top:4px; padding-top:12px;">
+        <span class="report-label" style="font-weight:700; color:var(--dark);">💛 নিট ব্যালান্স</span>
+        <span class="report-value balance">৳৩,১০০</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">📥 সংগ্রহের বিস্তারিত</div>
+
+      <div class="report-row">
+        <span class="report-label">👥 সক্রিয় দাতা</span>
+        <span class="report-value">৮৭ জন</span>
+      </div>
+      <div class="report-row">
+        <span class="report-label">📨 SMS পাঠানো হয়েছে</span>
+        <span class="report-value">৮৭টি</span>
+      </div>
+      <div class="report-row">
+        <span class="report-label">💌 সর্বোচ্চ দান</span>
+        <span class="report-value income">৳১,০০০ (রাকিব)</span>
+      </div>
+      <div class="report-row">
+        <span class="report-label">💌 সর্বনিম্ন দান</span>
+        <span class="report-value">৳২০ (মিনু)</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">📤 ব্যয়ের বিস্তারিত</div>
+      <div class="report-row">
+        <span class="report-label">🕌 এতিম ছাত্র (১৩ জন)</span>
+        <span class="report-value expense">৳৯,৭৫০</span>
+      </div>
+      <div class="report-row">
+        <span class="report-label">📱 SMS খরচ (৮৭টি)</span>
+        <span class="report-value expense">৳২৬</span>
+      </div>
+    </div>
+
+    <div class="spacer"></div>
+  </div>
+
+</div><!-- /main -->
+
+<!-- BOTTOM NAV -->
+<div class="bottom-nav">
+  <div class="bottom-nav-inner">
+    <button class="bottom-btn active" id="btn-home" onclick="switchPage('page-home', this)">
+      <span class="bottom-btn-icon">🏠</span>
+      হোম
+    </button>
+    <button class="bottom-btn" id="btn-members" onclick="switchPage('page-members', this)">
+      <span class="bottom-btn-icon">👥</span>
+      সদস্য
+    </button>
+    <button class="bottom-btn add-btn" id="btn-add" onclick="switchPage('page-add', this)">
+      <div class="add-circle">＋</div>
+      জমা
+    </button>
+    <button class="bottom-btn" id="btn-yatim" onclick="switchPage('page-yatim', this)">
+      <span class="bottom-btn-icon">🕌</span>
+      এতিম
+    </button>
+    <button class="bottom-btn" id="btn-report" onclick="switchPage('page-report', this)">
+      <span class="bottom-btn-icon">📊</span>
+      রিপোর্ট
+    </button>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+  // Page switching
+  function switchPage(pageId, btn) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.bottom-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(pageId).classList.add('active');
+    if (btn) btn.classList.add('active');
+    else {
+      const map = { 'page-home':'btn-home','page-members':'btn-members','page-add':'btn-add','page-yatim':'btn-yatim','page-report':'btn-report' };
+      if (map[pageId]) document.getElementById(map[pageId]).classList.add('active');
+    }
+    window.scrollTo(0, 0);
+  }
+
+  // Toast
+  let toastTimer;
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => t.classList.remove('show'), 3000);
+  }
+
+  // Amount chips
+  let selectedAmount = 0;
+  function selectAmount(amount, el) {
+    document.querySelectorAll('.amount-chip').forEach(c => c.classList.remove('selected'));
+    el.classList.add('selected');
+    selectedAmount = amount;
+    document.getElementById('amount-input').value = amount;
+    updateSMSPreview();
+  }
+  function selectCustom() {
+    document.querySelectorAll('.amount-chip').forEach(c => c.classList.remove('selected'));
+    document.getElementById('custom-chip').classList.add('selected');
+    document.getElementById('amount-input').focus();
+  }
+
+  // SMS Preview
+  function updateSMSPreview() {
+    const member = document.getElementById('select-member').value;
+    const amount = document.getElementById('amount-input').value;
+    const month = document.getElementById('select-month').value;
+    const preview = document.getElementById('sms-preview');
+    const smsText = document.getElementById('sms-text');
+
+    if (member && amount) {
+      preview.style.display = 'block';
+      smsText.textContent = `আস্সালামুআলাইকুম ${member}, আপনার ${month} মাসের চাঁদা ৳${amount} সফলভাবে জমা হয়েছে। আল্লাহ আপনার এই দানকে কবুল করুন। -স্বপ্নময় মানব কল্যান সংগঠন`;
+    } else {
+      preview.style.display = 'none';
+    }
+  }
+
+  // Submit
+  function submitPayment() {
+    const member = document.getElementById('select-member').value;
+    const amount = document.getElementById('amount-input').value;
+    if (!member || !amount) {
+      showToast('⚠️ সদস্য ও পরিমাণ দিন!');
+      return;
+    }
+    showToast(`✅ ৳${amount} জমা হয়েছে! SMS পাঠানো হচ্ছে...`);
+    setTimeout(() => showToast('📱 SMS সফলভাবে পাঠানো হয়েছে!'), 2000);
+    document.getElementById('select-member').value = '';
+    document.getElementById('amount-input').value = '';
+    document.querySelectorAll('.amount-chip').forEach(c => c.classList.remove('selected'));
+    document.getElementById('sms-preview').style.display = 'none';
+  }
+
+  // Month chip
+  function switchMonthChip(el) {
+    document.querySelectorAll('.month-chip').forEach(c => c.classList.remove('active'));
+    el.classList.add('active');
+  }
+
+  // Member filter
+  function filterMembers(val) {
+    // Demo only
+    if (val.length > 0) showToast(`🔍 "${val}" খোঁজা হচ্ছে...`);
+  }
+
+  // Animate progress bar on load
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      const fill = document.querySelector('.progress-bar-fill');
+      if (fill) fill.style.width = '68%';
+    }, 300);
+  });
+</script>
+
+</body>
+</html>
